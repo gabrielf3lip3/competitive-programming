@@ -1,61 +1,96 @@
+/*
+* Passo a passo do algoritmo:
+*
+* 1 - Ler os armários disponíveis
+* 2 - Achar o intervalo com o maior número de armários livres
+* 3 - Calcular a diferença entre o numero de armarios requisitado e o numero total de armários livres do intervalo
+* 4 - exibir na tela
+*/
+#include <stdbool.h>
 #include <stdio.h>
 
-int main() {
+/*
+* This function determines if a number is in an array
+  * @param num: o numero procurado
+  * @param arr: o array onde procurar
+  */
 
-  int n, l;
-  scanf("%d %d", &l, &n);
-  int dispo[n];
-
-  for(int i = 0; i < n; i++) {
-    scanf("%d", &dispo[i]);
+bool isAt(int arr[], int size, int num) {
+  for(int i = 0; i < size; i++) {
+    if(arr[i] == num)
+      return true;
   }
 
-  printf("Array... ");
-  for(int i = 0; i < n; i++) {
-    printf("%d ", dispo[i]);
-  }
+  return false;
+}
 
-  int intervs[l-n][2]; //guardar todos os intervalos
+/*
+  * This function contais the logic of the program
+  * @param arr: o array a ser analisado
+  * @param size: o numero de elementos do array
+  * @param request: o numero de armários pedidos
+  */
+
+int trocasArmario(int arr[], int size, int request) {
   
-  for(int i = 0; i < l-n; i++) {
-    
-    for(int j = i; j < n; j++) {
+  if(request > size) {
+    printf("Inválido\n");
+    return -1;
+  }
 
-      int maxSubInterv[2] = {0, 0}; //guarda o maior sub intervalo
+  int sizeMainArray = arr[size-1];
+  int mainArray[sizeMainArray];
 
-      int inicio, fim, cons = 0; //guarda o inicio e o fim do intervalo
-      printf("Is %d equal to %d?\n", dispo[j], dispo[j+1] - 1);
-      if(dispo[j] == dispo[j+1] - 1) {
-        printf("Consecutive founded at %d\n", j);
-        if(cons == 0) {
-          inicio = j-1;
-          cons = 1;
-        }
+  for(int i = 0; i < sizeMainArray; i++) {
+    mainArray[i] = i+1;
+  }
 
-        fim = j;
+  int maxInterv = 0;
 
-      } else {
-        int auxInterv[2] = {inicio, fim};
-        if(auxInterv[1] - auxInterv[0] > maxSubInterv[1] - maxSubInterv[0]) {
-          maxSubInterv[0] = auxInterv[0];
-          maxSubInterv[1] = auxInterv[1];
-        }
-        cons = 0;
-        inicio = 0;
-        fim = 0;
+  for(int i = 0; i <= sizeMainArray-request; i++) {
+    int total = 0;
+
+    printf("execution %d, the mxi is current %d\n", i, maxInterv);
+
+    for(int j = i; j < i+request; j++) {
+
+      printf("execution %d, the current total is %d\n", j, total);
+
+      if(isAt(arr, size, mainArray[j])) {
+
+        printf("%d founded\n", mainArray[j]);
+
+        total++;
       }
-      intervs[j][0] = maxSubInterv[0];
-      intervs[j][1] = maxSubInterv[1];
+
+      if(j == i+request-1 && total > maxInterv) {
+          printf("New max total: %d\n", total);
+          maxInterv = total;
+      }
     }
   }
 
-  for(int i = 0; i < l-n; i++) {
-    printf("printing all the array...\n\n");
-    printf("Start: %d end: %d\n", intervs[i][0], intervs[i][1]);
+  return request - maxInterv;
+}
+
+void print_array(int arr[], int size) {
+  for(int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  putchar('\n');
+}
+
+int main() {
+  int num, request; //num é o número de armários livres e request é o número de armários requisitados
+  scanf("%d %d", &request, &num);
+  int array[num];
+
+  for(int i = 0; i < num; i++) { //preenche the array
+    scanf("%d", &array[i]);
   }
 
-  /*int saida = 1;
-   *printf("%d\n", saida);
-   *return 0;
-  */
+  int trocas = trocasArmario(array, num, request);
+  printf("\nA quantidade mínima de trocas é igual a %d\n\n\n", trocas);
+
+  print_array(array, num);
 }

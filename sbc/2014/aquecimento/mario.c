@@ -46,25 +46,18 @@ int trocasArmario(int arr[], int size, int request) {
   }
 
   int maxInterv = 0;
-
   for(int i = 0; i <= sizeMainArray-request; i++) {
     int total = 0;
-
-    printf("execution %d, the mxi is current %d\n", i, maxInterv);
-
+    //printf("execution %d, the mxi is current %d\n", i, maxInterv);  ---> Debug line
     for(int j = i; j < i+request; j++) {
-
-      printf("execution %d, the current total is %d\n", j, total);
-
+      //printf("execution %d, the current total is %d\n", j, total); ---> Debug line
       if(isAt(arr, size, mainArray[j])) {
-
-        printf("%d founded\n", mainArray[j]);
-
+        //printf("%d founded\n", mainArray[j]); ---> Debug line
         total++;
       }
 
       if(j == i+request-1 && total > maxInterv) {
-          printf("New max total: %d\n", total);
+          //printf("New max total: %d\n", total); ---> Debug line
           maxInterv = total;
       }
     }
@@ -73,13 +66,15 @@ int trocasArmario(int arr[], int size, int request) {
   return request - maxInterv;
 }
 
-void print_array(int arr[], int size) {
-  for(int i = 0; i < size; i++) {
-    printf("%d ", arr[i]);
-  }
-  putchar('\n');
-}
-
+/*
+*void print_array(int arr[], int size) {
+* for(int i = 0; i < size; i++) {
+*  printf("%d ", arr[i]);
+*}
+*putchar('\n');
+*}
+*/  //  ---> Debug function
+ 
 int main() {
   int num, request; //num é o número de armários livres e request é o número de armários requisitados
   scanf("%d %d", &request, &num);
@@ -90,7 +85,7 @@ int main() {
   }
 
   int trocas = trocasArmario(array, num, request);
-  printf("\nA quantidade mínima de trocas é igual a %d\n\n\n", trocas);
+  printf("\nA quantidade mínima de trocas é igual a %d\n", trocas);
 
-  print_array(array, num);
+  //print_array(array, num); ---> Debug line
 }

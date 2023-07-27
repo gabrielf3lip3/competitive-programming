@@ -1,29 +1,22 @@
 #include <stdio.h> 
 
 int main() {
-  int Ncomandos_emitidos;
-  char direcao_atual = {'N'};
-  char direcoes[] = {'N', 'L', 'S', 'O'};
+  int numCommands;
+  int actualDir = 0;
+  char directions[] = "NLSO";
         
-  scanf("%d", &Ncomandos_emitidos);
+  scanf("%d", &numCommands);
         
-  for (int i = 0; i < Ncomandos_emitidos; i++){
-    char comando;
-    scanf(" %c", &comando);
-            
-    int indice_atual;
-    for (int j = 0; j < 4; j++){
-      if (direcoes[j] == direcao_atual)
-        indice_atual = j;
-    }
+  for (int i = 0; i < numCommands; i++){
+    char comand;
+    scanf(" %c", &comand);
 
-    if (comando == 'E'){
-      indice_atual = (indice_atual - 1 + 4) % 4;
-    } else if (comando == 'D'){
-      indice_atual = (indice_atual + 1) % 4;
+    if (comand == 'E'){
+      actualDir = (actualDir - 1 + 4) % 4;
+    } else if (comand == 'D'){
+      actualDir = (actualDir + 1) % 4;
     }
-            
-    direcao_atual = direcoes[indice_atual];
   }
-  printf("%c", direcao_atual);
+
+  printf("%c\n", directions[actualDir]);
 }

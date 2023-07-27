@@ -4,9 +4,8 @@ void descendenteMuda(int doors[], int size, int index) {
 
 	for(int i = 1; i <= size; i++) {
 
-		if((i > 0 && (i % index == 0)) || i == 0)
-			if(doors[i] == 1) doors[i] = 0;
-			else doors[i] = 1;
+		if(i > 0 && i % index == 0)
+			doors[i] = !doors[i];
 	}
 }
 

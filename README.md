@@ -8,4 +8,4 @@ Programação competitiva é um estilo de programar voltado para maratonas em qu
 
 * [Maratona de Programação da SBC](https://github.com/gabrielfelipeassuncaodesouza/competitive-programming/tree/main/sbc)
 * [Exercícios da plataforma beecrowd](https://github.com/gabrielfelipeassuncaodesouza/competitive-programming/tree/main/beecrowd)
-* [Exercícios do site exercism.org](#)
+* [Exercícios do site exercism.org](https://github.com/gabrielfelipeassuncaodesouza/competitive-programming/tree/main/exercism)

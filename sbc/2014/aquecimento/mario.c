@@ -48,16 +48,13 @@ int trocasArmario(int arr[], int size, int request) {
   int maxInterv = 0;
   for(int i = 0; i <= sizeMainArray-request; i++) {
     int total = 0;
-    //printf("execution %d, the mxi is current %d\n", i, maxInterv);  ---> Debug line
+   
     for(int j = i; j < i+request; j++) {
-      //printf("execution %d, the current total is %d\n", j, total); ---> Debug line
       if(isAt(arr, size, mainArray[j])) {
-        //printf("%d founded\n", mainArray[j]); ---> Debug line
         total++;
       }
 
       if(j == i+request-1 && total > maxInterv) {
-          //printf("New max total: %d\n", total); ---> Debug line
           maxInterv = total;
       }
     }
@@ -85,7 +82,7 @@ int main() {
   }
 
   int trocas = trocasArmario(array, num, request);
-  printf("\nA quantidade mínima de trocas é igual a %d\n", trocas);
+  printf("%d\n", trocas);
 
   //print_array(array, num); ---> Debug line
 }

@@ -1,22 +1,64 @@
-#include <stdio.h> 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct dir {
+  char direc;
+  struct dir *next;
+  struct dir *prev;
+} DIR;
+
+DIR* createDir(char v) {
+  DIR* new = (DIR*)malloc(sizeof(DIR));
+  new->direc = v;
+  new->next = NULL;
+  new->prev = NULL;
+  return new;
+}
+
+void insertNode(DIR** head, DIR** tail, char v) {
+  DIR* new = createDir(v);
+  if(*head == NULL) {
+    *head = new;
+    *tail = new;
+    new->next = *head;
+    new->prev = *head;
+  }
+  else {
+    (*tail)->next = new;
+    new->prev = *tail;
+    *tail = new;
+    (*tail)->next = *head;
+    (*head)->prev = *tail;
+  }
+} 
 
 int main() {
-  int numCommands;
-  int actualDir = 0;
-  char directions[] = "NLSO";
-        
-  scanf("%d", &numCommands);
-        
-  for (int i = 0; i < numCommands; i++){
-    char comand;
-    scanf(" %c", &comand);
 
-    if (comand == 'E'){
-      actualDir = (actualDir - 1 + 4) % 4;
-    } else if (comand == 'D'){
-      actualDir = (actualDir + 1) % 4;
-    }
+  int num;
+ 
+  DIR* head = NULL;
+  DIR* tail = NULL;
+
+  char directions[] = "NLSO";
+  for(int i = 0; i < 4; i++) {
+    insertNode(&head, &tail, directions[i]);
   }
 
-  printf("%c\n", directions[actualDir]);
+  DIR* aux = head;
+
+  scanf("%d", &num);
+  char comm[num];
+  scanf("%s", comm);
+
+  for(int i = 0; i < num; i++) {
+    if(comm[i] == 'E') {
+      aux = aux->prev;  
+    }
+    else if(comm[i] == 'D') {
+      aux = aux->next;
+    }
+  } 
+
+  printf("n: %d commands: %c\n", num, aux->direc);
 }

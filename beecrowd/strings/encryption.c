@@ -24,8 +24,11 @@ void encrypt(char** strings, int num) {
     }
 
     strrev(strings[i]);
-    for(int k = strlen(strings[i])/2; k < strlen(strings[i]); k++) {
-      strings[i][k] = strings[i][k]-1;
+
+    int lim = strlen(strings[i])/2; 
+
+    for(int k = lim; k < strlen(strings[i]); k++) {
+      strings[i][k]--;
     }
   }
 }
@@ -33,25 +36,19 @@ void encrypt(char** strings, int num) {
 int main() {
   int num;
   scanf("%d", &num);
+  getchar();
 
   char** strings = (char**)malloc(sizeof(char*)*num);
 
   for (int i = 0; i < num; i++) {
     strings[i] = (char*)malloc(sizeof(char)*20);
-  }
-
-  for(int i = 0; i < num; i++) {
-    char* buff = (char*)malloc(sizeof(char)*20);
-    size_t n = 20;
-    getline(&buff, &n,  stdin);
-    strcpy(strings[i], buff);
-    free(buff);
+    fgets(strings[i], 20, stdin);
   }
 
   encrypt(strings, num);
 
   for (int i = 0; i < num; i++) {
-    printf("%s\n", strings[i]);
+    printf("%s", strings[i]);
   }
 
   for (int i = 0; i < num; i++) {

@@ -9,11 +9,12 @@ void printarr(int arr[], int sz) {
 }
 
 void shift(int arr[], int sz, int key) {
-	for(int i = key; i < sz-1; i++) {
-		arr[i] = arr[i+1];
-	} 
+	//for(int i = key; i < sz-1; i++) {
+	//	arr[i] = arr[i+1];
+	//} 
 
-	arr[sz-1] = -1;
+	//arr[sz-1] = -1;
+	arr[key] = -1;
 }
 
 int main() {
@@ -24,19 +25,22 @@ int main() {
 	for(int i = 0; i < size; i++) arr[i] = i+1;
 
 
-	int key = step - 1;
+	int key = step-1;
 	int aux = size;
 
 	printarr(arr, size);
 	printf("*******\n");
 
 	for(int i = 0; i < size-1; i++) {
-		int oldkey = key;
-		aux--;
-	      	key = (key + step) % aux;
 
-		shift(arr, size, oldkey);
+		shift(arr, size, key);
 		printarr(arr, size);
+
+	      	for(int i = 0; i < step; i++) {
+			key++;
+		}
+
+		if(key >= size) key-=size;
 	}
 
 	printf("%d\n",arr[0]);

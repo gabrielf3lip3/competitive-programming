@@ -32,8 +32,8 @@ int main() {
 
 	for(int i = 0; i < size-1; i++) {
 		int oldkey = key;
-	      	key = (key + step) % aux;
 		aux--;
+	      	key = (key + step) % aux;
 
 		shift(arr, size, oldkey);
 		printarr(arr, size);

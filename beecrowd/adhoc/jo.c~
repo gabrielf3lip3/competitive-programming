@@ -35,9 +35,7 @@ int main() {
 		aux--;
 	      	key = (key + step) % aux;
 
-		
-
-		shift(arr, size, oldkey);
+		shift(arr, size, oldkey-1);
 		printarr(arr, size);
 	}
 
